@@ -1,0 +1,68 @@
+/**
+ * @author John Gardiner and Adam Sinck
+ * 
+ * This program will implement one class (the item class), which will
+ * be used by the Info class. It implements the Comparable interface.
+ *
+*/
+
+public class Item implements Comparable {
+    
+    String str;
+    int val;
+
+    /**
+     * This compares the values of the two strings.
+     */
+    public int compareTo(Comparable item) {
+	int lenOne = str.length();
+	Item myItem = (Item) item;
+	String str2 = myItem.getStr();
+	int lenTwo = str2.length();
+	int returnValue = 0;
+	int index = 0;
+
+	while (index <= lenOne && index <= lenTwo && returnValue == 0) {
+	    returnValue = str2.charAt(index) - str.charAt(index);
+	    index += 1;
+	}
+
+	return returnValue;
+    }
+
+    /**
+     * This returns the str of the item.
+     * 
+     * @return a the str of the item.
+     */
+    public String getStr() {
+	return str;
+    }
+
+    /**
+     * This returns the val of the item.
+     * 
+     * @return a the val of the item.
+     */
+    public int getVal() {
+	return val;
+    }
+
+    /**
+     * This returns a readable representation of the item.
+     * 
+     * @return a readable string containing the str and the val.
+     */
+    public String toString() {
+	return "String: " + str + "\nValue: " + val;
+    }
+}
+
+/**
+ * @author John Gardiner and Adam Sinck
+ * 
+ * This interface is for the Item class.
+*/
+interface Comparable {
+    int compareTo(Comparable item);
+}
