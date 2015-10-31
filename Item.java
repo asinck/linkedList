@@ -12,6 +12,14 @@ public class Item implements Comparable {
     int val;
 
     /**
+     * This is the constructor for the class.
+     */
+    public Item(String myString, int myValue) {
+	str = myString;
+	val = myValue;
+    }
+    
+    /**
      * This compares the values of the two strings.
      */
     public int compareTo(Comparable item) {
