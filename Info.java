@@ -97,6 +97,7 @@ public class Info {
 	    int compare = list.getData().compareTo(myItem);
 	    if (compare == 0) {
 		list = list.getNext();
+		numNodes--;
 	    }
 	    else if (compare < 0) {
 		list = delete(myItem, list);
@@ -113,6 +114,7 @@ public class Info {
 	    //the item is the current item
 	    if (compare == 0) {
 		node = myNode.getNext();
+		numNodes--;
 	    }
 	    //the item hasn't been found yet
 	    else if (compare < 0) {
@@ -126,30 +128,7 @@ public class Info {
 	}
 	return node;
     }
-/*    /**
-     * This deletes the given item from the list.
-     * /
-    public void delete(Item myItem) {
-	Node currentNode = list;
-	boolean found = false;
 
-	if (currentNode != null) {
-	    //also need to track the previous node for pointers
-	    Item currentItem = currentNode.getData();
-	    
-	    while (currentNode != null && !found) {
-		if (currentItem.compareTo(myItem) == 0) {
-		    found = true;
-		    //this is wrong
-		    currentNode.setNext(null);
-		}
-	    }
-	}
-	if (found) {
-	    numNodes--;
-	}
-    }
-*/
     /**
      * This returns the Item associated with the given key.
      * 
