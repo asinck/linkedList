@@ -35,7 +35,121 @@ public class Info {
 	list = null;
 	numNodes = 0;
     }
+    
+    /**
+     * This inserts an Item into the list.
+     * 
+     * @param myItem the Item to be inserted
+     */
+    public void insert (Item myItem) {
+	if (list == null) {
+	    list = new Node(myItem);
+	    numNodes++;
+	}
+	else {
+	    int compare = list.getData().compareTo(myItem);
+	    if (compare < 0) {
+		Node myNode = new Node(myItem);
+		myNode.setNext(list);
+		list = myNode;
+		numNodes++;
+	    }
+	    else if (compare < 0) {
+		insert(myItem, list);
+	    }
+	}
+    }
+    /*
+      part two of the insert method; this part uses recursion
+      */
+    private void insert (Item myItem, Node myNode) {
+	//if we've reached the end of the list
+	if (myNode.getNext() == null) {
+	    Node node = new Node(myItem); // no null end node now
+	    myNode.setNext(node);
+	    numNodes++;
+	}
+	else {
+	    int compare = myNode.getData().compareTo(myItem);
+	    if (compare < 0) {
+		compare = myNode.getNext().getData().compareTo(myItem);
+		if (compare > 0) {
+		    Node node = new Node(myItem);
+		    node.setNext(myNode.getNext());
+		    myNode.setNext(node);
+		    numNodes++;
+		}
+		else if (compare != 0) {
+		    insert(myItem, myNode.getNext());
+		}
+	    }
+	    else if (compare != 0) {
+		insert(myItem, myNode.getNext());
+	    }
+	}
+    }
 
+    /**
+     * This deletes the given item from the list.
+     */
+    public void delete (Item myItem) {
+	if (list != null) {
+	    int compare = list.getData().compareTo(myItem);
+	    if (compare == 0) {
+		list = list.getNext();
+	    }
+	    else if (compare < 0) {
+		list = delete(myItem, list);
+	    }
+	}
+    }
+    /*
+      part two of the delete method; this part uses recursion
+      */
+    private Node delete (Item myItem, Node myNode) {
+	Node node = null;
+	if (myNode != null) {
+	    int compare = myNode.getData().compareTo(myItem);
+	    //the item is the current item
+	    if (compare == 0) {
+		node = myNode.getNext();
+	    }
+	    //the item hasn't been found yet
+	    else if (compare < 0) {
+		node = myNode;
+		node.setNext(delete(myItem, myNode.getNext()));
+	    }
+	    //the item is not in the list
+	    else {
+		node = myNode;
+	    }
+	}
+	return node;
+    }
+/*    /**
+     * This deletes the given item from the list.
+     * /
+    public void delete(Item myItem) {
+	Node currentNode = list;
+	boolean found = false;
+
+	if (currentNode != null) {
+	    //also need to track the previous node for pointers
+	    Item currentItem = currentNode.getData();
+	    
+	    while (currentNode != null && !found) {
+		if (currentItem.compareTo(myItem) == 0) {
+		    found = true;
+		    //this is wrong
+		    currentNode.setNext(null);
+		}
+	    }
+	}
+	if (found) {
+	    numNodes--;
+	}
+    }
+*/
     /**
      * This returns the Item associated with the given key.
      * 
