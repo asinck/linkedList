@@ -9,10 +9,12 @@
  */
 
 /*
-questions:
+questions/notes:
 
 * Info.copy(int indexA, int indexB) returns a linked list from the
-*     element with ID indexA to the element with ID indexB, right?
+*     element with ID indexA to the element with ID indexB, or null if
+*     a parameter is out of bounds.
+
 
 * Item.compareTo() -- compare just the strings, or everything? I'm
 *     assuming that the val is an ID for the Item, and that only the
@@ -35,7 +37,7 @@ public class Info {
     //methods
 
     /**
-     * This is the constructor for the class.
+     * This is the constructor for the Info class.
      */
     public Info () {
 	list = null;
@@ -65,6 +67,7 @@ public class Info {
 	    }
 	}
     }
+
     /*
       part two of the insert method; this part uses recursion
       */
@@ -110,6 +113,7 @@ public class Info {
 	    }
 	}
     }
+
     /*
       part two of the delete method; this part uses recursion
       */
@@ -249,27 +253,51 @@ class Node {
     private Item data;
     private Node next;
 
-    //constructor for the class
+    /**
+     * This is the constructor for the Node class.
+     */
     public Node (Item myItem) {
 	data = myItem;
 	next = null;
     }
-
+    
+    /**
+     * This sets the `data` field of the Node.
+     */
     public void setData (Item myData) {
 	data = myData;
     }
+    
+    /**
+     * This sets the `next` field of the Node.
+     */
     public void setNext (Node nextNode) {
 	next = nextNode;
     }
 
+    /**
+     * This gets the `data` field of the Node.
+     * 
+     * @return the data field of the Node.
+     */
     public Item getData () {
 	return data;
     }
 
+    /**
+     * This gets the `next` field of the Node.
+     * 
+     * @return the address of the next Node.
+     */
     public Node getNext () {
 	return next;
     }
-    
+
+    /**
+     * This returns a readable representation of the Node.
+     * 
+     * @return a readable string containing the data.
+     */    
     public String toString() {
 	return "[ " + data + " ]";
     }
