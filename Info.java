@@ -14,11 +14,17 @@ questions:
 * Info.copy(int indexA, int indexB) returns a linked list from the
 *     element with ID indexA to the element with ID indexB, right?
 
-* Item.compareTo() -- compare just the strings, or everything?
+* Item.compareTo() -- compare just the strings, or everything? I'm
+*     assuming that the val is an ID for the Item, and that only the
+*     strings need to be compared.
 
-* Node.next: is this set directly by the Info class?
+
+* Node.next: is this set directly by the Info class? Right now this
+*     program uses a set method.
+
 
 */
+
 
 public class Info {
     
@@ -48,7 +54,7 @@ public class Info {
 	}
 	else {
 	    int compare = list.getData().compareTo(myItem);
-	    if (compare < 0) {
+	    if (compare > 0) {
 		Node myNode = new Node(myItem);
 		myNode.setNext(list);
 		list = myNode;
@@ -90,7 +96,7 @@ public class Info {
     }
 
     /**
-     * This deletes the given item from the list.
+     * This deletes the given Item from the list.
      */
     public void delete (Item myItem) {
 	if (list != null) {
@@ -198,7 +204,8 @@ public class Info {
     public String toString() {
 	Node currentNode = list;
 	String myString = "";
-	final int PADDING = 5;
+	final int PADDING = 3;
+	int index = 0;
 	while (currentNode != null) {
 	    String value = currentNode.toString();
 	    myString += value;
@@ -209,18 +216,23 @@ public class Info {
 		
 		//this displays as follows:
 		// [value]--.
-		// .-------/
-		// \-[value]--.
-		// .---------/
-		// \-[value]
+		// .-------'
+		// `-[value]--.
+		// .---------'
+		// `-[value]
+		int dashes = value.length() + PADDING;
+		if (index == 0) {
+		    dashes -= 2;
+		}
 		for (
 		     int iterator = 0;
-		     iterator < value.length() + PADDING;
+		     iterator < dashes;
 		     iterator++
 		     ) {
 		    myString += "-";
 		}
-		myString += "/\n\\-";
+		myString += "'\n`-";
+		index++;
 	    }
 	}
 	return myString;
