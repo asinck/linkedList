@@ -5,8 +5,8 @@ Item contains a String and an integer. It has the following methods:
 - compareTo, compares the current instance to the given item,
 - getStr and getVal, accessors for the string and integer, and 
 - toString, which you can guess the reason for.
-Item implements the Comparable interface.
 
+Item implements the Comparable interface.
 
 Info is a linked list of Nodes. Both Info and Node are in the Info file. Info has two data members: a list (type Node), and the number of nodes (type integer). Info has the following public methods:
 - Info, the constructor,
