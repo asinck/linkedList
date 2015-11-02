@@ -5,6 +5,7 @@ Item contains a String and an integer. It has the following methods:
 - compareTo, compares the current instance to the given item,
 - getStr and getVal, accessors for the string and integer, and 
 - toString, which you can guess the reason for.
+
 Item implements the Comparable interface.
 
 
