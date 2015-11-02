@@ -30,8 +30,8 @@ public class Item implements Comparable {
 	int returnValue = 0;
 	int index = 0;
 
-	while (index <= lenOne && index <= lenTwo && returnValue == 0) {
-	    returnValue = str2.charAt(index) - str.charAt(index);
+	while (index < lenOne && index < lenTwo && returnValue == 0) {
+	    returnValue = str.charAt(index) - str2.charAt(index);
 	    index += 1;
 	}
 
@@ -62,7 +62,7 @@ public class Item implements Comparable {
      * @return a readable string containing the str and the val.
      */
     public String toString() {
-	return "String: " + str + "\nValue: " + val;
+	return "String: " + str + " . Value: " + val;
     }
 }
 
