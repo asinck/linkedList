@@ -22,7 +22,7 @@ Info is a linked list of Nodes. Both Info and Node are in the Info file. Info ha
 Node has an Item and a reference to the next node, and the following methods:
 - Node, the constructor,
 - setData and setNext, set methods,
-- getData and getNext, get methods,
+- getData and getNext, get methods, and 
 - toString, returns a string representation of the Node.
 
 
