@@ -4,7 +4,7 @@
  * This program will implement one class (the item class), which will
  * be used by the Info class. It implements the Comparable interface.
  *
-*/
+ */
 
 public class Item implements Comparable {
     
@@ -15,27 +15,27 @@ public class Item implements Comparable {
      * This is the constructor for the class.
      */
     public Item(String myString, int myValue) {
-	str = myString;
-	val = myValue;
+        str = myString;
+        val = myValue;
     }
     
     /**
      * This compares the values of the two strings.
      */
     public int compareTo(Comparable item) {
-	int lenOne = str.length();
-	Item myItem = (Item) item;
-	String str2 = myItem.getStr();
-	int lenTwo = str2.length();
-	int returnValue = 0;
-	int index = 0;
+        int lenOne = str.length();
+        Item myItem = (Item) item;
+        String str2 = myItem.getStr();
+        int lenTwo = str2.length();
+        int returnValue = 0;
+        int index = 0;
 
-	while (index < lenOne && index < lenTwo && returnValue == 0) {
-	    returnValue = str.charAt(index) - str2.charAt(index);
-	    index += 1;
-	}
+        while (index < lenOne && index < lenTwo && returnValue == 0) {
+            returnValue = str.charAt(index) - str2.charAt(index);
+            index += 1;
+        }
 
-	return returnValue;
+        return returnValue;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Item implements Comparable {
      * @return a the str of the item.
      */
     public String getStr() {
-	return str;
+        return str;
     }
 
     /**
@@ -53,7 +53,7 @@ public class Item implements Comparable {
      * @return a the val of the item.
      */
     public int getVal() {
-	return val;
+        return val;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Item implements Comparable {
      * @return a readable string containing the str and the val.
      */
     public String toString() {
-	return "String: " + str + " . Value: " + val;
+        return "String: " + str + " . Value: " + val;
     }
 }
 
@@ -70,7 +70,7 @@ public class Item implements Comparable {
  * @author John Gardiner and Adam Sinck
  * 
  * This interface is for the Item class.
-*/
+ */
 interface Comparable {
     int compareTo(Comparable item);
 }

@@ -12,17 +12,17 @@ public class InfoTest {
     //This will test to make sure that the constructor is working
     @Test
     public void testInfo() {
-	Info info;
-	assertNull(info);
-	info = new Info();
-	assertNotNull(info);
+        Info info;
+        assertNull(info);
+        info = new Info();
+        assertNotNull(info);
     }
     
     //this will test the insert method by running a bunch of
     //insert test methods
     @Test
     public void testInsert() {
-    	testInsertAndGetOne();
+        testInsertAndGetOne();
         testInsertAndGetTwo();
         testInsertAndGetThree();
         testInsertAndGetFour();
@@ -33,7 +33,7 @@ public class InfoTest {
     //needs to check the size also.
     @Test
     public void testGet() {
-    	testInsertAndGetOne();
+        testInsertAndGetOne();
         testInsertAndGetTwo();
         testInsertAndGetThree();
         testInsertAndGetFour();
@@ -43,8 +43,8 @@ public class InfoTest {
     @Test
     public void testInsertAndGetOne() {
         Info info = new Info();
-    	info.insert("1");
-    	assertEquals("1", info.get(1));
+        info.insert("1");
+        assertEquals("1", info.get(1));
     }
 
     @Test
@@ -156,10 +156,10 @@ public class InfoTest {
     public void testDeleteThree() {
         Info info = new Info();
         for (int i = 0; i < 10; i++) {
-        	info.insert("" + i);
+            info.insert("" + i);
         }
         for (int i = 0; i < 10; i++) {
-        	info.delete("" + i);
+            info.delete("" + i);
         }
         assertEquals(0, info.count());
     }
@@ -423,7 +423,7 @@ public class InfoTest {
     //test methods
     @Test
     public void testIndexOf() {
-    	testIndexOfOne();
+        testIndexOfOne();
         testIndexOfTwo();
         testIndexOfThree();
     }
@@ -495,7 +495,7 @@ public class InfoTest {
     //test methods
     @Test
     public void testToArray() {
-    	testToArrayOne();
+        testToArrayOne();
         testToArrayTwo();
         testToArrayThree();
         testToArrayFour();
