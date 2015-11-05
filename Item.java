@@ -35,6 +35,9 @@ public class Item implements Comparable {
             index += 1;
         }
 
+        if (returnValue == 0) {
+            returnValue = val - myItem.getVal();
+        }
         return returnValue;
     }
 

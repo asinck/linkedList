@@ -21,15 +21,70 @@
   *     strings need to be compared.
 
 
-  * Node.next: is this set directly by the Info class? Right now this
-  *     program uses a set method.
-
-
   */
 
 
 public class Info {
     
+    /**
+     * @author John Gardiner and Adam Sinck
+     *
+     * This is the Node class used by the Info class.
+     */
+    class Node {
+
+        private Item data;
+        private Node next;
+
+        /**
+         * This is the constructor for the Node class.
+         */
+        public Node (Item myItem) {
+            data = myItem;
+            next = null;
+        }
+    
+        /**
+         * This sets the `data` field of the Node.
+         */
+        public void setData (Item myData) {
+            data = myData;
+        }
+    
+        /**
+         * This sets the `next` field of the Node.
+         */
+        public void setNext (Node nextNode) {
+            next = nextNode;
+        }
+
+        /**
+         * This gets the `data` field of the Node.
+         * 
+         * @return the data field of the Node.
+         */
+        public Item getData () {
+            return data;
+        }
+
+        /**
+         * This gets the `next` field of the Node.
+         * 
+         * @return the address of the next Node.
+         */
+        public Node getNext () {
+            return next;
+        }
+
+        /**
+         * This returns a readable representation of the Node.
+         * 
+         * @return a readable string containing the data.
+         */    
+        public String toString() {
+            return "[ " + data + " ]";
+        }
+    }
     //data members
     private Node list;
     private int numNodes;
@@ -299,62 +354,4 @@ public class Info {
     }
 }
 
-/**
- * @author John Gardiner and Adam Sinck
- *
- * This is the Node class used by the Info class.
- */
-class Node {
 
-    private Item data;
-    private Node next;
-
-    /**
-     * This is the constructor for the Node class.
-     */
-    public Node (Item myItem) {
-        data = myItem;
-        next = null;
-    }
-    
-    /**
-     * This sets the `data` field of the Node.
-     */
-    public void setData (Item myData) {
-        data = myData;
-    }
-    
-    /**
-     * This sets the `next` field of the Node.
-     */
-    public void setNext (Node nextNode) {
-        next = nextNode;
-    }
-
-    /**
-     * This gets the `data` field of the Node.
-     * 
-     * @return the data field of the Node.
-     */
-    public Item getData () {
-        return data;
-    }
-
-    /**
-     * This gets the `next` field of the Node.
-     * 
-     * @return the address of the next Node.
-     */
-    public Node getNext () {
-        return next;
-    }
-
-    /**
-     * This returns a readable representation of the Node.
-     * 
-     * @return a readable string containing the data.
-     */    
-    public String toString() {
-        return "[ " + data + " ]";
-    }
-}
