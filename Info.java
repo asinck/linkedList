@@ -39,16 +39,16 @@ public class Info {
         /**
          * This is the constructor for the Node class.
          */
-        public Node (Item myItem) {
-            data = myItem;
+        public Node (Item newItem) {
+            data = newItem;
             next = null;
         }
     
         /**
          * This sets the `data` field of the Node.
          */
-        public void setData (Item myData) {
-            data = myData;
+        public void setData (Item newData) {
+            data = newData;
         }
     
         /**
@@ -85,9 +85,11 @@ public class Info {
             return "[ " + data + " ]";
         }
     }
-    //data members
+    
+    //data members of the Info class
     private Node list;
     private int numNodes;
+
 
     //methods
 
@@ -104,21 +106,21 @@ public class Info {
      * 
      * @param myItem the Item to be inserted
      */
-    public void insert (Item myItem) {
+    public void insert (Item newItem) {
         if (list == null) {
-            list = new Node(myItem);
+            list = new Node(newItem);
             numNodes++;
         }
         else {
-            int compare = list.getData().compareTo(myItem);
-            if (compare > 0) {
-                Node myNode = new Node(myItem);
+            int result = list.getData().compareTo(newItem);
+            if (result > 0) {
+                Node myNode = new Node(newItem);
                 myNode.setNext(list);
                 list = myNode;
                 numNodes++;
             }
-            else if (compare < 0) {
-                insert(myItem, list);
+            else if (result < 0) {
+                insert(newItem, list);
             }
         }
     }
@@ -126,29 +128,29 @@ public class Info {
     /*
       part two of the insert method; this part uses recursion
     */
-    private void insert (Item myItem, Node myNode) {
+    private void insert (Item newItem, Node currentNode) {
         //if we've reached the end of the list
-        if (myNode.getNext() == null) {
-            Node node = new Node(myItem); // no null end node now
-            myNode.setNext(node);
+        if (currentNode.getNext() == null) {
+            Node insertNode = new Node(newItem); // no null end node now
+            currentNode.setNext(insertNode);
             numNodes++;
         }
         else {
-            int compare = myNode.getData().compareTo(myItem);
-            if (compare < 0) {
-                compare = myNode.getNext().getData().compareTo(myItem);
-                if (compare > 0) {
-                    Node node = new Node(myItem);
-                    node.setNext(myNode.getNext());
-                    myNode.setNext(node);
+            int result = currentNode.getData().compareTo(newItem);
+            if (result < 0) {
+                result = currentNode.getNext().getData().compareTo(newItem);
+                if (result > 0) {
+                    Node insertNode = new Node(newItem);
+                    insertNode.setNext(currentNode.getNext());
+                    currentNode.setNext(insertNode);
                     numNodes++;
                 }
-                else if (compare != 0) {
-                    insert(myItem, myNode.getNext());
+                else if (result != 0) {
+                    insert(newItem, currentNode.getNext());
                 }
             }
-            else if (compare != 0) {
-                insert(myItem, myNode.getNext());
+            else if (result != 0) {
+                insert(newItem, currentNode.getNext());
             }
         }
     }
@@ -172,26 +174,39 @@ public class Info {
     /*
       part two of the delete method; this part uses recursion
     */
-    private Node delete (Item itemToDelete, Node targetNode) {
+    private Node delete (Item itemToDelete, Node currentNode) {
         Node outputNode = null;
-        if (targetNode != null) {
-            int result = targetNode.getData().compareTo(itemToDelete);
+        if (currentNode != null) {
+            int result = currentNode.getData().compareTo(itemToDelete);
             //the item is the current item
             if (result == 0) {
-                outputNode = targetNode.getNext();
+                outputNode = currentNode.getNext();
                 numNodes--;
             }
             //the item hasn't been found yet
             else if (result < 0) {
-                outputNode = targetNode;
-                outputNode.setNext(delete(itemToDelete, targetNode.getNext()));
+                outputNode = currentNode;
+		Node nextNode = currentNode.getNext();
+                outputNode.setNext(delete(itemToDelete, nextNode));
             }
             //the item is not in the list
             else {
-                outputNode = targetNode;
+                outputNode = currentNode;
             }
         }
         return outputNode;
+    }
+
+    /**
+     * This deletes all the Items in the given list from the list.
+     */
+    public void delete (Info deleteList) {
+	Node currentNode = deleteList.getList();
+	while (currentNode != null) {
+	    Item deleteItem = currentNode.getData();
+	    delete(deleteItem);
+	    currentNode.setNext(currentNode.getNext());
+	}
     }
 
     /**
@@ -204,20 +219,28 @@ public class Info {
         Node currentNode = null;
         int index = 0;      
     
-        if(targetIndex >= index){
+        if (targetIndex >= index) {
             currentNode = list;
         }
         
-        while(currentNode != null && index < targetIndex) {
+        while (currentNode != null && index < targetIndex) {
             currentNode = currentNode.getNext();
             index++;
         }
     
         Item result = (currentNode != null) ? currentNode.getData() : null; 
         return result;
-    
     }
 
+    /**
+     * This returns the first Node in the list
+     * 
+     * @return list, the first Node in the list
+     */
+    public Node getList() {
+	return list;
+    }
+    
     /**
      * This returns the number of Nodes in the list.
      * 
@@ -252,14 +275,18 @@ public class Info {
         if (!found) {
             index = NOT_FOUND;
         }
+	
         return index;
     }
     
     /**
-     * Return an Info object that is a copy of the contents from the first parameter position to the last parameter 
-     * position.  If the bounds given are out of bounds, return null.
+     * Return an Info object that is a copy of the contents from the
+     *     first parameter position to the last parameter position.
+     *     If the bounds given are out of bounds, return null.
+     * 
      * @param targetStart first position to copy
      * @param targetEnd last position to copy
+     * 
      * @return new Info object
      */
     Info copy (int targetStart, int targetEnd) {
@@ -267,30 +294,39 @@ public class Info {
         int index = 0, copyStart = -1, copyEnd = -1;
         
         //Find node to start copy at
-        while(currentNode != null && index < targetStart) {
+        while (currentNode != null && index < targetStart) {
             currentNode = currentNode.getNext();
             index += 1;
         }
         copyStart = index;
         
         Info listCopy = new Info();
-        while(currentNode != null && index <= targetEnd) {
-            listCopy.insert(currentNode.getData()); //Insert takes care of making deep copy
+        while (currentNode != null && index <= targetEnd) {
+	    //Insert takes care of making a deep copy
+            listCopy.insert(currentNode.getData()); 
             currentNode = currentNode.getNext();
             index += 1;
         }
         copyEnd = index - 1;
         
-        if(targetStart > targetEnd || targetStart != copyStart || targetEnd != copyEnd) { //Search went out of bounds!
+        if (
+	    targetStart > targetEnd
+	    || targetStart != copyStart
+	    || targetEnd != copyEnd
+	    ) { //Search went out of bounds!
             listCopy = null;
         }
+	
         return listCopy;
     }
     
     /**
-     * Merge the current Info object with the parameter Info object.  
-     * The results should be a new Info object in ascending order with no duplicates.
+     * Merge the current Info object with the parameter Info object.
+     *     The results should be a new Info object in ascending order
+     *     with no duplicates.
+     * 
      * @param list Info object to merge with the current Info object
+     * 
      * @return new Info object with merged values
      */
     Info merge (Info listToBeMerged) {
@@ -302,7 +338,8 @@ public class Info {
             currentNode = currentNode.getNext();
         }
         
-        currentNode = listToBeMerged.list;
+        currentNode = listToBeMerged.getList();
+	
         while(currentNode != null) {
             mergedList.insert(currentNode.getData());
             currentNode = currentNode.getNext();
@@ -352,6 +389,8 @@ public class Info {
         }
         return myString;
     }
+
+    
 }
 
 

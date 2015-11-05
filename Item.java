@@ -12,13 +12,23 @@ public class Item implements Comparable {
     int val;
 
     /**
-     * This is the constructor for the class.
+     * This is one of the constructors for the class.
+     * It accepts a string and an int.
      */
     public Item(String myString, int myValue) {
         str = myString;
         val = myValue;
     }
-    
+
+    /**
+     * This is the other constructor for the class.
+     * It accepts an Item.
+     */
+    public Item(Item newItem) {
+        str = newItem.getStr();
+        val = newItem.getVal();
+    }
+
     /**
      * This compares the values of the two strings.
      */
@@ -34,10 +44,7 @@ public class Item implements Comparable {
             returnValue = str.charAt(index) - str2.charAt(index);
             index += 1;
         }
-
-        if (returnValue == 0) {
-            returnValue = val - myItem.getVal();
-        }
+	
         return returnValue;
     }
 
