@@ -1,5 +1,4 @@
-//package info;
-
+package info;
 /**
  * @author John Gardiner and Adam Sinck
  * 
@@ -8,63 +7,56 @@
  *
  */
 
-public class Item implements Comparable {
-    
+public class Item implements Comparable<Item> {
+	public final static String DELIMITER = ", ";
     String str;
     int val;
 
     /**
-     * This is one of the constructors for the class.
-     * It accepts a string and an int.
+     * This is the constructor for the class.
      */
-    public Item(String myString, int myValue) {
-        str = myString;
-        val = myValue;
+    public Item(String str, int val) {
+        this.str = str;
+        this.val = val;
+    }
+    
+    /**
+     * This is the copy constructor for the class.
+     */
+    public Item(Item item) {
+        str = item.str;
+        val = item.val;
     }
 
-    /**
-     * This is the other constructor for the class.
-     * It accepts an Item.
-     */
-    public Item(Item newItem) {
-        str = newItem.str;
-        val = newItem.val;
-    }
 
     /**
      * This compares the values of the two strings.
      */
-    public int compareTo(Comparable item) {
+    @Override public int compareTo(Item otherItem) {
+        String str2 = otherItem.str;
         int lenOne = str.length();
-        Item myItem = (Item) item;
-        String str2 = myItem.str;
         int lenTwo = str2.length();
-        int returnValue = 0;
+        int result = 0;
         int index = 0;
 
-        while (index < lenOne && index < lenTwo && returnValue == 0) {
-            returnValue = str.charAt(index) - str2.charAt(index);
+        while (index < lenOne && index < lenTwo && result == 0) {
+            result = str.charAt(index) - str2.charAt(index);
             index += 1;
         }
-	
-        return returnValue;
-    }
 
+        if (result == 0) {
+            result = val - otherItem.val;
+        }
+        
+        return result;
+    }
+    
     /**
      * This returns a readable representation of the item.
      * 
      * @return a readable string containing the str and the val.
      */
-    public String toString() {
-        return "String: " + str + " . Value: " + val;
+    @Override public String toString() {
+        return str + DELIMITER + val;
     }
-}
-
-/**
- * @author John Gardiner and Adam Sinck
- * 
- * This interface is for the Item class.
- */
-interface Comparable {
-    int compareTo(Comparable item);
 }
