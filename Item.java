@@ -1,3 +1,5 @@
+//package info;
+
 /**
  * @author John Gardiner and Adam Sinck
  * 
@@ -25,8 +27,8 @@ public class Item implements Comparable {
      * It accepts an Item.
      */
     public Item(Item newItem) {
-        str = newItem.getStr();
-        val = newItem.getVal();
+        str = newItem.str;
+        val = newItem.val;
     }
 
     /**
@@ -35,7 +37,7 @@ public class Item implements Comparable {
     public int compareTo(Comparable item) {
         int lenOne = str.length();
         Item myItem = (Item) item;
-        String str2 = myItem.getStr();
+        String str2 = myItem.str;
         int lenTwo = str2.length();
         int returnValue = 0;
         int index = 0;
@@ -46,24 +48,6 @@ public class Item implements Comparable {
         }
 	
         return returnValue;
-    }
-
-    /**
-     * This returns the str of the item.
-     * 
-     * @return a the str of the item.
-     */
-    public String getStr() {
-        return str;
-    }
-
-    /**
-     * This returns the val of the item.
-     * 
-     * @return a the val of the item.
-     */
-    public int getVal() {
-        return val;
     }
 
     /**
