@@ -1,2 +1,5 @@
 #compiled java programs
 *.class
+
+#notes to self
+*.txt
