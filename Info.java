@@ -284,7 +284,7 @@ public class Info {
         Node currentNode = list;
         String outputString = "";
         while (currentNode != null) {
-            String value = currentNode.toString();
+            String value = currentNode.data.toString();
             outputString += value;
             currentNode = currentNode.next;
             if (currentNode != null) {
