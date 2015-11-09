@@ -3,3 +3,6 @@
 
 #notes to self
 *.txt
+
+#python scripts
+*.py
