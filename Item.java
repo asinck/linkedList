@@ -1,4 +1,5 @@
-package info;
+//package info;
+
 /**
  * @author John Gardiner and Adam Sinck
  * 
@@ -7,7 +8,7 @@ package info;
  *
  */
 
-public class Item implements Comparable<Item> {
+public class Item implements Comparable {
 	public final static String DELIMITER = ", ";
     String str;
     int val;
@@ -15,42 +16,38 @@ public class Item implements Comparable<Item> {
     /**
      * This is the constructor for the class.
      */
-    public Item(String str, int val) {
-        this.str = str;
-        this.val = val;
+    public Item(String myString, int myValue) {
+        str = myString;
+        val = myValue;
     }
     
     /**
      * This is the copy constructor for the class.
      */
-    public Item(Item item) {
-        str = item.str;
-        val = item.val;
+    public Item(Item newItem) {
+        str = newItem.str;
+        val = newItem.val;
     }
-
 
     /**
      * This compares the values of the two strings.
      */
-    @Override public int compareTo(Item otherItem) {
-        String str2 = otherItem.str;
+    public int compareTo(Comparable item) {
         int lenOne = str.length();
+        Item myItem = (Item) item;
+        String str2 = myItem.str;
         int lenTwo = str2.length();
-        int result = 0;
+        int returnValue = 0;
         int index = 0;
 
-        while (index < lenOne && index < lenTwo && result == 0) {
-            result = str.charAt(index) - str2.charAt(index);
+        while (index < lenOne && index < lenTwo && returnValue == 0) {
+            returnValue = str.charAt(index) - str2.charAt(index);
             index += 1;
         }
-
-        if (result == 0) {
-            result = val - otherItem.val;
-        }
-        
-        return result;
+	
+        return returnValue;
     }
-    
+
     /**
      * This returns a readable representation of the item.
      * 
@@ -59,4 +56,13 @@ public class Item implements Comparable<Item> {
     @Override public String toString() {
         return str + DELIMITER + val;
     }
+}
+
+/**
+ * @author John Gardiner and Adam Sinck
+ * 
+ * This interface is for the Item class.
+ */
+interface Comparable {
+    int compareTo(Comparable item);
 }
