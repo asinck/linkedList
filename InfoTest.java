@@ -26,9 +26,13 @@ public class InfoTest {
         Item i1 = new Item("A", 1);
                 
         Info info = new Info();
+
+        //test info is not null
+        assertNotNull("info object not correctly initialized", info);
         
         //test object array is initialized and count set to 0
         assertEquals("Class not correctly initiliazed", 0, info.count());
+        
     }
 
     /**
@@ -405,4 +409,40 @@ public class InfoTest {
         assertEquals("failed to correctly delete info list", 0, infoB.count());
     }
 
+    /**
+     * toString should output the items in a readable format.
+     */
+    @Test
+    public void testToString() {   
+        Item item1  = new Item("Alice", 22);
+        Item item2  = new Item("Bob", 25);
+        Item item3  = new Item("Chad", 36);
+        Item item4  = new Item("Derek", 3);
+        Item item5  = new Item("Emily", 11);
+        
+        Info infoA = new Info();
+        assertEquals("toString failed.", "", itemA.toString());
+        
+        infoA.insert(item1);
+        String equalString = "Alice, 22";
+        assertEquals("toString failed.", equalString, infoA.toString());
+        
+        infoA.insert(item2);
+        equalString += "\nBob, 25";
+        assertEquals("toString failed.", equalString, infoA.toString());
+        
+        infoA.insert(item3);
+        equalString += "\nChad, 36";
+        assertEquals("toString failed.", equalString, infoA.toString());
+        
+        infoA.insert(item4);
+        equalString += "\nDerek, 3";
+        assertEquals("toString failed.", equalString, infoA.toString());
+        
+        infoA.insert(item5);
+        equalString += "\nEmily, 11";
+        assertEquals("toString failed.", equalString, infoA.toString());
+
+    }
 }
+
