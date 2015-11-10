@@ -155,8 +155,8 @@ public class Info {
                 }
                 //If the two nodes are equal, update currentNodeB as
                 //well so node is not reinserted
-                if (inputCurrentNode != null 
-                    && thisCurrentNode.data.compareTo(inputCurrentNode.data) == 0 ) {
+                if (inputCurrentNode != null &&
+                    thisCurrentNode.data.compareTo(inputCurrentNode.data) == 0 ) {
                     inputCurrentNode = inputCurrentNode.next;
                 }       
                 thisCurrentNode = thisCurrentNode.next;
