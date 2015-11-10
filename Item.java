@@ -8,7 +8,7 @@
  *
  */
 
-public class Item implements Comparable {
+public class Item implements Comparable<Item> {
     public final static String DELIMITER = ", ";
     String str;
     int val;
@@ -34,19 +34,8 @@ public class Item implements Comparable {
      */
     @Override public int compareTo(Comparable inputItem) {
         Item otherItem = (Item) inputItem;
-        String str = this.str.toLowerCase();
-        String str2 = otherItem.str.toLowerCase();
-        int lenOne = str.length();
-        int lenTwo = str2.length();
-        int result = 0;
-        int index = 0;
-
-        while (index < lenOne && index < lenTwo && result == 0) {
-            result = str.charAt(index) - str2.charAt(index);
-            index += 1;
-        }
-
-        return result;
+        int compareResult = str.compareToIgnoreCase(otherItem.str);
+        return compareResult;
     }
 
     /**
@@ -57,13 +46,4 @@ public class Item implements Comparable {
     @Override public String toString() {
         return str + DELIMITER + val;
     }
-}
-
-/**
- * @author John Gardiner and Adam Sinck
- * 
- * This interface is for the Item class.
- */
-interface Comparable {
-    int compareTo(Comparable item);
 }
