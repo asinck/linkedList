@@ -17,6 +17,9 @@ public class Test {
             System.out.println("Please select an option. (1..12 or 0)  ");
             option = getInt();
             System.out.println("");
+            
+            //many of the options dealing with lists allow the user to
+            //choose to work with either list one or two
             switch (option) {
             case 1: // create an item
                 testItem = makeItem();
