@@ -12,14 +12,13 @@
 
 public class Info {
     
-    /* Inner Classes */
+    /* Inner Class */
     /**
      * @author John Gardiner and Adam Sinck
      *
      * This is the Node inner class used by the Info class.
      */
     private class Node {
-
         Item data;
         Node next;
 
@@ -57,7 +56,7 @@ public class Info {
         Node currentNode = null;
         int index = 0;      
     
-        if (targetIndex >= index) {
+        if (targetIndex >= index && targetIndex <= numNodes - 1){
             currentNode = list;
         }
         
@@ -103,20 +102,80 @@ public class Info {
      
         return result;
     }
-    
+        
     /**
      * This inserts an Item into the list.
      *
      * @param itemToInsert the Item to be inserted
      */
     public void insert (Item itemToInsert) {
+        //make a list of one item
         Info insertList = new Info();
         insertList.list = new Node(itemToInsert);
         
+        //make a new list that merges the current list and insertList
         Info newList = merge(insertList);
         
+        //set list to newList
         list = newList.list;
-        numNodes = newList.numNodes;
+
+        //take care of the length of list
+        numNodes = newList.count();
+    }
+
+    /**
+     * Merge the current Info object with the parameter Info object.
+     *     The results should be a new Info object in ascending order
+     *     with no duplicates.
+     *
+     * @param inputList Info object to merge with the current Info object
+     *
+     * @return new Info object with merged values
+     */
+    Info merge (Info inputList) {
+        Info mergedList = new Info();
+        
+        Node thisCurrentNode = list;
+        Node inputCurrentNode = inputList.list;
+        
+        //Insert nodes into new list
+        Node mergedCurrentNode = mergedList.list;
+        while (thisCurrentNode != null || inputCurrentNode != null) {
+            if (
+                inputCurrentNode == null ||
+                (thisCurrentNode != null &&
+                 thisCurrentNode.data.compareTo(inputCurrentNode.data) < 1 )) {
+                if (mergedCurrentNode == null) {
+                    mergedList.list = new Node(thisCurrentNode.data);
+                    mergedCurrentNode = mergedList.list;
+                }
+                else {
+                    mergedCurrentNode.next = new Node(thisCurrentNode.data);
+                    mergedCurrentNode = mergedCurrentNode.next;
+                }
+                //If the two nodes are equal, update currentNodeB as
+                //well so node is not reinserted
+                if (inputCurrentNode != null 
+                    && thisCurrentNode.data.compareTo(inputCurrentNode.data) == 0 ) {
+                    inputCurrentNode = inputCurrentNode.next;
+                }       
+                thisCurrentNode = thisCurrentNode.next;
+            }
+            else {
+                if (mergedCurrentNode == null) {
+                    mergedList.list = new Node(inputCurrentNode.data);
+                    mergedCurrentNode = mergedList.list;
+                }
+                else {
+                    mergedCurrentNode.next = new Node(inputCurrentNode.data);
+                    mergedCurrentNode = mergedCurrentNode.next;
+                }               
+                inputCurrentNode = inputCurrentNode.next;
+            }
+            mergedList.numNodes++;
+        }
+      
+        return mergedList;
     }
 
     /**
@@ -130,19 +189,25 @@ public class Info {
      * @return new Info object
      */
     Info copy (int targetStart, int targetEnd) {
-        Node currentNode = list;
-        int index = 0, copyStart = -1, copyEnd = -1;
+        Node currentNode = null;
+        int index = 0;
+        Info listCopy = null;
+        Node copyNode = null;
+        
+        //Perform search IFF bounds are valid
+        if (targetStart <= targetEnd && targetStart >= index && targetEnd <= numNodes - 1) { 
+            currentNode = list;
+            listCopy = new Info();
+            copyNode = listCopy.list;
+        }
         
         //Find node to start copy at
         while (currentNode != null && index < targetStart) {
             currentNode = currentNode.next;
             index++;
         }
-        copyStart = index;
         
-        Info listCopy = new Info();
         //Copy nodes into listCopy
-        Node copyNode = listCopy.list;
         while (currentNode != null && index <= targetEnd) {
             if (copyNode == null) {
                 listCopy.list = new Node(currentNode.data);
@@ -155,12 +220,6 @@ public class Info {
             currentNode = currentNode.next;
             listCopy.numNodes++;
             index++;
-        }
-        copyEnd = index - 1;
-        
-        if (targetStart > targetEnd || targetStart != copyStart || targetEnd != copyEnd) { 
-            //Search went out of bounds!
-            listCopy = null;
         }
         
         return listCopy;
@@ -220,77 +279,20 @@ public class Info {
     }
 
     /**
-     * Merge the current Info object with the parameter Info object.
-     *     The results should be a new Info object in ascending order
-     *     with no duplicates.
-     *
-     * @param inputList Info object to merge with the current Info object
-     *
-     * @return new Info object with merged values
-     */
-    Info merge (Info inputList) {
-        Info mergedList = new Info();
-        
-        Node thisCurrentNode = list;
-        Node inputCurrentNode = inputList.list;
-        
-        //Insert nodes into new list
-        Node mergedCurrentNode = mergedList.list;
-        while (thisCurrentNode != null || inputCurrentNode != null) {
-            if (
-                inputCurrentNode == null ||
-                (thisCurrentNode != null &&
-                 thisCurrentNode.data.compareTo(inputCurrentNode.data) < 1 )) {
-                if (mergedCurrentNode == null) {
-                    mergedList.list = new Node(thisCurrentNode.data);
-                    mergedCurrentNode = mergedList.list;
-                }
-                else {
-                    mergedCurrentNode.next = new Node(thisCurrentNode.data);
-                    mergedCurrentNode = mergedCurrentNode.next;
-                }
-                //If the two nodes are equal, update currentNodeB as
-                //well so node is not reinserted
-                if (inputCurrentNode != null 
-                    && thisCurrentNode.data.compareTo(inputCurrentNode.data) == 0
-                    ) {
-                    inputCurrentNode = inputCurrentNode.next;
-                }       
-                thisCurrentNode = thisCurrentNode.next;
-            }
-            else {
-                if (mergedCurrentNode == null) {
-                    mergedList.list = new Node(inputCurrentNode.data);
-                    mergedCurrentNode = mergedList.list;
-                }
-                else {
-                    mergedCurrentNode.next = new Node(inputCurrentNode.data);
-                    mergedCurrentNode = mergedCurrentNode.next;
-                }               
-                inputCurrentNode = inputCurrentNode.next;
-            }
-            mergedList.numNodes++;
-        }
-      
-        return mergedList;
-    }
-
-    /**
      * This returns a readable representation of the Info.
      *
      * @return a readable string containing the Nodes.
      */
-    @Override public String toString() {
+    @Override 
+    public String toString() {
         Node currentNode = list;
-        String outputString = "";
+        StringBuilder output = new StringBuilder();
+        
         while (currentNode != null) {
-            String value = currentNode.data.toString();
-            outputString += value;
+            output.append(currentNode.data.toString() + "\n");
             currentNode = currentNode.next;
-            if (currentNode != null) {
-                outputString += "\n";
-            }
         }
-        return outputString;
+        
+        return output.toString();
     }
 }

@@ -402,7 +402,7 @@ public class InfoTest {
         infoB.delete(info);
         
         //verify delete functionality
-        assertEquals("failed to correctly delete info list", 0, infoB.count());    
+        assertEquals("failed to correctly delete info list", 0, infoB.count());
     }
 
 }

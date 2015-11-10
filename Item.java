@@ -9,14 +9,14 @@
  */
 
 public class Item implements Comparable {
-	public final static String DELIMITER = ", ";
+    public final static String DELIMITER = ", ";
     String str;
     int val;
 
     /**
      * This is the constructor for the class.
      */
-    public Item(String myString, int myValue) {
+    public Item (String myString, int myValue) {
         str = myString;
         val = myValue;
     }
@@ -24,7 +24,7 @@ public class Item implements Comparable {
     /**
      * This is the copy constructor for the class.
      */
-    public Item(Item newItem) {
+    public Item (Item newItem) {
         str = newItem.str;
         val = newItem.val;
     }
@@ -32,20 +32,21 @@ public class Item implements Comparable {
     /**
      * This compares the values of the two strings.
      */
-    public int compareTo(Comparable item) {
+    @Override 
+    public int compareTo(Item otherItem) {
+        String str = this.str.toLowerCase();
+        String str2 = otherItem.str.toLowerCase();
         int lenOne = str.length();
-        Item myItem = (Item) item;
-        String str2 = myItem.str;
         int lenTwo = str2.length();
-        int returnValue = 0;
+        int result = 0;
         int index = 0;
 
-        while (index < lenOne && index < lenTwo && returnValue == 0) {
-            returnValue = str.charAt(index) - str2.charAt(index);
+        while (index < lenOne && index < lenTwo && result == 0) {
+            result = str.charAt(index) - str2.charAt(index);
             index += 1;
         }
-	
-        return returnValue;
+
+        return result;
     }
 
     /**
@@ -53,7 +54,8 @@ public class Item implements Comparable {
      * 
      * @return a readable string containing the str and the val.
      */
-    @Override public String toString() {
+    @Override 
+    public String toString() {
         return str + DELIMITER + val;
     }
 }
