@@ -1,4 +1,4 @@
-//package info;
+package info;
 
 /**
  * @author John Gardiner and Adam Sinck

@@ -22,9 +22,7 @@ public class InfoTest {
      *     loaded into the array.
      */
     @Test
-    public void testInfo() {
-        Item i1 = new Item("A", 1);
-                
+    public void testInfo() {       
         Info info = new Info();
 
         //test info is not null
@@ -36,11 +34,11 @@ public class InfoTest {
     }
 
     /**
-     * Items are inserted into the array in random order.  Then
-     *     the array is tested to verify the items are sorted in
-     *     ascending order.  Next, items already in the array are
-     *     inserted, and count is tested to verify that they were
-     *     NOT added.  Edge cases tested.
+     * Items are inserted into the array in random order.  Then the
+     *     array is tested to verify the items are sorted in ascending
+     *     order.  Next, items already in the array are inserted, and
+     *     count is tested to verify that they were NOT added.  Edge
+     *     cases tested.
      */
     @Test
     public void testInsert() {
@@ -81,11 +79,10 @@ public class InfoTest {
 
     /**
      * Items are inserted into the array, then they are deleted.
-     *     Delete is verified using indexOf method to determine if
-     *     the removed item is still in the array.  After every
-     *     item is removed, one more item is inserted back into
-     *     the array to verify that the array can be refilled once
-     *     emptied.
+     *     Delete is verified using indexOf method to determine if the
+     *     removed item is still in the array.  After every item is
+     *     removed, one more item is inserted back into the array to
+     *     verify that the array can be refilled once emptied.
      */
     @Test
     public void testDelete() {
@@ -124,12 +121,11 @@ public class InfoTest {
     }
 
     /**
-     * Items are inserted into the array, then those same items
-     *     are retrieved using get().  The result is verified to
-     *     ensure the correct item is returned for the appropriate
-     *     index.  Both upper and lower bounds are checked to
-     *     verify the correct value is returned for an incorrect
-     *     input.
+     * Items are inserted into the array, then those same items are
+     *     retrieved using get().  The result is verified to ensure
+     *     the correct item is returned for the appropriate index.
+     *     Both upper and lower bounds are checked to verify the
+     *     correct value is returned for an incorrect input.
      */
     @Test
     public void testGet() {
@@ -167,11 +163,10 @@ public class InfoTest {
     }
 
     /**
-     * Items are inserted into an array, then the count is
-     *     verified at count = 0, count = 1, count = 2.  Next, the
-     *     items are removed, and the count is verified once more
-     *     to ensure that count is reset properly after the array
-     *     has been emptied
+     * Items are inserted into an array, then the count is verified at
+     *     count = 0, count = 1, count = 2.  Next, the items are
+     *     removed, and the count is verified once more to ensure that
+     *     count is reset properly after the array has been emptied
      */
     @Test
     public void testCount() {
@@ -200,11 +195,11 @@ public class InfoTest {
     }
 
     /**
-     * Insert items into array, then the functionality of copy()
-     *     is verified by copying various subsets of the array and
-     *     testing the values with-in those arrays.  Finally three
-     *     out of bounds conditions are tested, in such a way that
-     *     all possible out of bounds conditions are tested.
+     * Insert items into array, then the functionality of copy() is
+     *     verified by copying various subsets of the array and
+     *     testing the values with-in those arrays.  Finally three out
+     *     of bounds conditions are tested, in such a way that all
+     *     possible out of bounds conditions are tested.
      */
     @Test
     public void testCopy() {
@@ -269,9 +264,9 @@ public class InfoTest {
     }
 
     /**
-     * Two Info objects are created and filled with values in such
-     *     a way that one array in larger than the other.  Next,
-     *     two more values are added to each array so that the
+     * Two Info objects are created and filled with values in such a
+     *     way that one array in larger than the other.  Next, two
+     *     more values are added to each array so that the
      *     intersection of the two arrays is not empty.  Finally,
      *     merge() is called and the returned array is checked to
      *     verify all items from the original two arrays (except
@@ -302,15 +297,15 @@ public class InfoTest {
     }
 
     /**
-     * An Info object is created and filled, then indexOf() is
-     *     called to retrieve specific values.  The results are
-     *     tested to verify that the correct item is returned.
-     *     Finally, indexOf() is called with incorrect values to
-     *     verify the correct value is returned.
+     * An Info object is created and filled, then indexOf() is called
+     *     to retrieve specific values.  The results are tested to
+     *     verify that the correct item is returned.  Finally,
+     *     indexOf() is called with incorrect values to verify the
+     *     correct value is returned.
      */
     @Test
     public void testIndexOf() {
-        Item i0 = new Item("a", 0);
+        Item i0 = new Item("z", 0);
         Item i1 = new Item("A", 1);
         Item i2 = new Item("B", 2);
         Item i3 = new Item("C", 3);
@@ -336,7 +331,12 @@ public class InfoTest {
         assertEquals("incorrect value returned for invalid input", -1,
                      info.indexOf(i5));
     }
-        
+       
+    /**
+     * Create two Info objects, fill them and test the functionality
+     *     of deleteInfoList. Every occurrence of an Item object from
+     *     list 2 that common to list 1 should be removed from list 1.
+     */
     @Test
     public void testDeleteInfoList() {
         Item i0 = new Item("A", 0);
@@ -421,28 +421,27 @@ public class InfoTest {
         Item item5  = new Item("Emily", 11);
         
         Info infoA = new Info();
-        assertEquals("toString failed.", "", itemA.toString());
+        assertEquals("toString failed.", "", infoA.toString());
         
         infoA.insert(item1);
-        String equalString = "Alice, 22";
+        String equalString = "Alice" + Item.DELIMITER + "22\n";
         assertEquals("toString failed.", equalString, infoA.toString());
         
         infoA.insert(item2);
-        equalString += "\nBob, 25";
+        equalString += "Bob" + Item.DELIMITER + "25\n";
         assertEquals("toString failed.", equalString, infoA.toString());
         
         infoA.insert(item3);
-        equalString += "\nChad, 36";
+        equalString += "Chad" + Item.DELIMITER + "36\n";
         assertEquals("toString failed.", equalString, infoA.toString());
         
         infoA.insert(item4);
-        equalString += "\nDerek, 3";
+        equalString += "Derek" + Item.DELIMITER + "3\n";
         assertEquals("toString failed.", equalString, infoA.toString());
         
         infoA.insert(item5);
-        equalString += "\nEmily, 11";
+        equalString += "Emily" + Item.DELIMITER + "11\n";
         assertEquals("toString failed.", equalString, infoA.toString());
 
     }
 }
-

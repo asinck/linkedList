@@ -7,7 +7,7 @@
  *     of the specifications.
  */
 
-//package info;
+package info;
 
 import static org.junit.Assert.*;
 
@@ -47,33 +47,16 @@ public class ItemTest {
     public void testCompareTo() {   
         Item itemA = new Item("ABC", 1);
         Item itemB = new Item("CBA", 1);
-        Item itemC = new Item("ABC", 1);
-        Item itemD = new Item("abc", 1);
+        Item itemD = new Item("ABC", 1);
+        Item itemE = new Item("abc", 1);
                         
         assertTrue("failed to compare to equal items. ",
-                   itemA.compareTo(itemC) == 0);
-        assertTrue("failed to compare to equal items (ignore case). ",
                    itemA.compareTo(itemD) == 0);
+        assertTrue("failed to compare to equal items (ignore case). ",
+                   itemA.compareTo(itemE) == 0);
         assertTrue("failed to compare items. this < other",
                    itemA.compareTo(itemB) < 0);
         assertTrue("failed to compare items. this > other",
                    itemB.compareTo(itemA) > 0);
-    }
-
-    /**
-     * toString should output the items in a readable format.
-     */
-    @Test
-    public void testToString() {   
-        Item itemA = new Item("ABC", 1);
-        Item itemB = new Item("CBA", 50);
-        Item itemC = new Item("abc", 42);
-                        
-        assertEquals("toString failed.", "ABC" + Item.DELIMITER + "1",
-                     itemA.toString());
-        assertEquals("toString failed.", "CBA" + Item.DELIMITER + "50",
-                     itemB.toString());
-        assertEquals("toString failed.", "abc" + Item.DELIMITER + "42",
-                     itemC.toString());
     }
 }

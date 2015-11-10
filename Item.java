@@ -1,4 +1,4 @@
-//package info;
+package info;
 
 /**
  * @author John Gardiner and Adam Sinck
@@ -32,7 +32,7 @@ public class Item implements Comparable<Item> {
     /**
      * This compares the values of the two strings.
      */
-    @Override public int compareTo(Comparable inputItem) {
+    @Override public int compareTo(Item inputItem) {
         Item otherItem = (Item) inputItem;
         int compareResult = str.compareToIgnoreCase(otherItem.str);
         return compareResult;
