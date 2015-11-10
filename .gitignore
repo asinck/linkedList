@@ -6,3 +6,6 @@
 
 #python scripts
 *.py
+
+#backup files
+*.*~
