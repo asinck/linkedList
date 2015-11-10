@@ -47,6 +47,79 @@ public class Info {
     }
     
     /**
+     * This inserts an Item into the list.
+     *
+     * @param itemToInsert the Item to be inserted
+     */
+    public void insert (Item itemToInsert) {
+        //make a list of one item
+        Info insertList = new Info();
+        insertList.list = new Node(itemToInsert);
+        
+        //make a new list that merges the current list and insertList
+        Info newList = merge(insertList);
+        
+        //set list to newList
+        list = newList.list;
+
+        //take care of the length of list
+        numNodes = newList.count();
+    }
+    
+    /**
+     * This deletes the given Item from the list.
+     *
+     * @param itemToDelete Item to be removed from this Info object
+     */
+    public void delete (Item itemToDelete) {
+        Info deleteList = new Info();
+        deleteList.insert(itemToDelete);
+        
+        delete(deleteList);
+    }
+    
+    /**
+     * Remove a list of items from this info list.  The result is that
+     *     items common to this Info object and the input Info object
+     *     are removed from this Info object.
+     *
+     * @param itemsToDelete Info object to containing items to remove
+     *        from this Info object
+     */
+    public void delete (Info itemsToDelete) {
+        Node currentNode = list;
+        Node previousNode = null;
+        Node deleteNode = itemsToDelete.list;
+        
+        while (currentNode != null && deleteNode != null) {
+            if (previousNode == null &&
+                currentNode.data.compareTo(deleteNode.data) == 0) {
+                //Item to be deleted is root node, and must be handled accordingly
+                list = list.next;
+                numNodes--;
+                currentNode = list;
+                deleteNode = deleteNode.next;
+            }
+            else if (currentNode.data.compareTo(deleteNode.data) == 0) {
+                previousNode.next = currentNode.next;
+                numNodes--;
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+                deleteNode = deleteNode.next;
+            }
+            //Else no match, so select smaller next node, and set
+            //appropriate reference
+            else if (currentNode.data.compareTo(deleteNode.data) < 0) {
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+            }
+            else {
+                deleteNode = deleteNode.next;
+            }
+        }
+    }
+
+    /**
      * This returns the Item associated with the given key.
      * 
      * @return the Item associated with the given key, or null if
@@ -79,50 +152,53 @@ public class Info {
     }
 
     /**
-     * This returns the index of the given Item.
+     * Return an Info object that is a copy of the contents from the
+     *     first parameter position to the last parameter position.
+     *     If the bounds given are out of bounds, return null.
      *
-     * @return index, the index of the given item.
+     * @param targetStart first position to copy
+     * @param targetEnd last position to copy
+     *
+     * @return new Info object
      */
-    public int indexOf (Item targetItem) {
-        final int NOT_FOUND = -1;
+    Info copy (int targetStart, int targetEnd) {
+        Node currentNode = null;
         int index = 0;
-        int result = NOT_FOUND;
-        Node currentNode = list;
-    
-        while (currentNode != null && result == NOT_FOUND) {
-            Item currentItem = currentNode.data;
-            if (currentItem.compareTo(targetItem) == 0) {
-                result = index;
+        Info listCopy = null;
+        Node copyNode = null;
+        
+        //Perform search IFF bounds are valid
+        if (targetStart <= targetEnd &&
+            targetStart >= index && targetEnd <= numNodes - 1) { 
+            currentNode = list;
+            listCopy = new Info();
+            copyNode = listCopy.list;
+        }
+        
+        //Find node to start copy at
+        while (currentNode != null && index < targetStart) {
+            currentNode = currentNode.next;
+            index++;
+        }
+        
+        //Copy nodes into listCopy
+        while (currentNode != null && index <= targetEnd) {
+            if (copyNode == null) {
+                listCopy.list = new Node(currentNode.data);
+                copyNode = listCopy.list;
             }
             else {
-                currentNode = currentNode.next;
-                index++;
+                copyNode.next = new Node(currentNode.data);
+                copyNode = copyNode.next;
             }
-        } 
-     
-        return result;
+            currentNode = currentNode.next;
+            listCopy.numNodes++;
+            index++;
+        }
+        
+        return listCopy;
     }
         
-    /**
-     * This inserts an Item into the list.
-     *
-     * @param itemToInsert the Item to be inserted
-     */
-    public void insert (Item itemToInsert) {
-        //make a list of one item
-        Info insertList = new Info();
-        insertList.list = new Node(itemToInsert);
-        
-        //make a new list that merges the current list and insertList
-        Info newList = merge(insertList);
-        
-        //set list to newList
-        list = newList.list;
-
-        //take care of the length of list
-        numNodes = newList.count();
-    }
-
     /**
      * Merge the current Info object with the parameter Info object.
      *     The results should be a new Info object in ascending order
@@ -179,103 +255,28 @@ public class Info {
     }
 
     /**
-     * Return an Info object that is a copy of the contents from the
-     *     first parameter position to the last parameter position.
-     *     If the bounds given are out of bounds, return null.
+     * This returns the index of the given Item.
      *
-     * @param targetStart first position to copy
-     * @param targetEnd last position to copy
-     *
-     * @return new Info object
+     * @return index, the index of the given item.
      */
-    Info copy (int targetStart, int targetEnd) {
-        Node currentNode = null;
+    public int indexOf (Item targetItem) {
+        final int NOT_FOUND = -1;
         int index = 0;
-        Info listCopy = null;
-        Node copyNode = null;
-        
-        //Perform search IFF bounds are valid
-        if (targetStart <= targetEnd && targetStart >= index && targetEnd <= numNodes - 1) { 
-            currentNode = list;
-            listCopy = new Info();
-            copyNode = listCopy.list;
-        }
-        
-        //Find node to start copy at
-        while (currentNode != null && index < targetStart) {
-            currentNode = currentNode.next;
-            index++;
-        }
-        
-        //Copy nodes into listCopy
-        while (currentNode != null && index <= targetEnd) {
-            if (copyNode == null) {
-                listCopy.list = new Node(currentNode.data);
-                copyNode = listCopy.list;
-            }
-            else {
-                copyNode.next = new Node(currentNode.data);
-                copyNode = copyNode.next;
-            }
-            currentNode = currentNode.next;
-            listCopy.numNodes++;
-            index++;
-        }
-        
-        return listCopy;
-    }
-
-    /**
-     * This deletes the given Item from the list.
-     *
-     * @param itemToDelete Item to be removed from this Info object
-     */
-    public void delete (Item itemToDelete) {
-        Info deleteList = new Info();
-        deleteList.insert(itemToDelete);
-        
-        delete(deleteList);
-    }
-    
-    /**
-     * Remove a list of items from this info list.  The result is that
-     *     items common to this Info object and the input Info object
-     *     are removed from this Info object.
-     *
-     * @param itemsToDelete Info object to containing items to remove
-     *        from this Info object
-     */
-    public void delete (Info itemsToDelete) {
+        int result = NOT_FOUND;
         Node currentNode = list;
-        Node previousNode = null;
-        Node deleteNode = itemsToDelete.list;
-        
-        while (currentNode != null && deleteNode != null) {
-            if (previousNode == null &&
-                currentNode.data.compareTo(deleteNode.data) == 0) {
-                //Item to be deleted is root node, and must be handled accordingly
-                list = list.next;
-                numNodes--;
-                currentNode = list;
-                deleteNode = deleteNode.next;
-            }
-            else if (currentNode.data.compareTo(deleteNode.data) == 0) {
-                previousNode.next = currentNode.next;
-                numNodes--;
-                previousNode = currentNode;
-                currentNode = currentNode.next;
-                deleteNode = deleteNode.next;
-            }
-            //Else no match, so select smaller next node, and set
-            //appropriate reference
-            else if (currentNode.data.compareTo(deleteNode.data) < 0) {
-                previousNode = currentNode;
-                currentNode = currentNode.next;
+    
+        while (currentNode != null && result == NOT_FOUND) {
+            Item currentItem = currentNode.data;
+            if (currentItem.compareTo(targetItem) == 0) {
+                result = index;
             }
             else {
-                deleteNode = deleteNode.next;
+                currentNode = currentNode.next;
+                index++;
             }
-        }
+        } 
+     
+        return result;
     }
 
     /**
