@@ -32,8 +32,8 @@ public class Item implements Comparable {
     /**
      * This compares the values of the two strings.
      */
-    @Override 
-    public int compareTo(Item otherItem) {
+    @Override public int compareTo(Comparable inputItem) {
+        Item otherItem = (Item) inputItem;
         String str = this.str.toLowerCase();
         String str2 = otherItem.str.toLowerCase();
         int lenOne = str.length();
@@ -54,8 +54,7 @@ public class Item implements Comparable {
      * 
      * @return a readable string containing the str and the val.
      */
-    @Override 
-    public String toString() {
+    @Override public String toString() {
         return str + DELIMITER + val;
     }
 }
