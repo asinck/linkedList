@@ -7,7 +7,7 @@
  *     of the specifications.
  */
 
-package info;
+//package info;
 
 import static org.junit.Assert.*;
 
