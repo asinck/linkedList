@@ -9,7 +9,6 @@ package info;
  * singly-linked list, using Nodes. The Node class has an Item (an
  * external class), and the next Node.
  */
-
 public class Info {
     
     /* Inner Class */
@@ -164,7 +163,7 @@ public class Info {
     Info copy (int targetStart, int targetEnd) {
         Node currentNode = null;
         int index = 0;
-        Info listCopy = null;
+        Info listCopy = new Info();
         Node copyNode = null;
         
         //Perform search IFF bounds are valid
@@ -290,8 +289,15 @@ public class Info {
         StringBuilder output = new StringBuilder();
         
         while (currentNode != null) {
-            output.append(currentNode.data.toString() + "\n");
+            output.append(currentNode.data.toString());
+
+	    if(currentNode.next != null) {
+		 output.append(" ");
+	    }
+             
             currentNode = currentNode.next;
+
+            
         }
         
         return output.toString();

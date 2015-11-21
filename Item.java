@@ -9,7 +9,7 @@ package info;
  */
 
 public class Item implements Comparable<Item> {
-    public final static String DELIMITER = ", ";
+    public final static String DELIMITER = " ";
     String str;
     int val;
 
