@@ -2,9 +2,9 @@
  * @author John Gardiner and Adam Sinck
  *
  * The InfoTest class contains a series of JUnit test methods that
- *     operate on methods of the Info class.  Output for both correct
- *     and incorrect inputs are tested, in addition to other aspects of
- *     the specifications.
+ * operate on methods of the Info class. Output for both correct and
+ * incorrect inputs are tested, in addition to other aspects of the
+ * specifications.
  */
 
 package info;
@@ -15,11 +15,10 @@ import org.junit.Test;
 
 public class InfoTest {
     /**
-     * Class constructor should initialize a new array and set
-     *     item count to 0.  Furthermore, a Info object should be
-     *     able to change size to hold a large number of items.
-     *     The constant N determines how many test values are
-     *     loaded into the array.
+     * Class constructor should initialize a new array and set item
+     * count to 0. Furthermore, a Info object should be able to change
+     * size to hold a large number of items. The constant N determines
+     * how many test values are loaded into the array.
      */
     @Test
     public void testInfo() {       
@@ -34,11 +33,11 @@ public class InfoTest {
     }
 
     /**
-     * Items are inserted into the array in random order.  Then the
-     *     array is tested to verify the items are sorted in ascending
-     *     order.  Next, items already in the array are inserted, and
-     *     count is tested to verify that they were NOT added.  Edge
-     *     cases tested.
+     * Items are inserted into the array in random order. Then the
+     * array is tested to verify the items are sorted in ascending
+     * order. Next, items already in the array are inserted, and count
+     * is tested to verify that they were NOT added. Edge cases
+     * tested.
      */
     @Test
     public void testInsert() {
@@ -79,10 +78,10 @@ public class InfoTest {
 
     /**
      * Items are inserted into the array, then they are deleted.
-     *     Delete is verified using indexOf method to determine if the
-     *     removed item is still in the array.  After every item is
-     *     removed, one more item is inserted back into the array to
-     *     verify that the array can be refilled once emptied.
+     * Delete is verified using indexOf method to determine if the
+     * removed item is still in the array. After every item is
+     * removed, one more item is inserted back into the array to
+     * verify that the array can be refilled once emptied.
      */
     @Test
     public void testDelete() {
@@ -122,10 +121,10 @@ public class InfoTest {
 
     /**
      * Items are inserted into the array, then those same items are
-     *     retrieved using get().  The result is verified to ensure
-     *     the correct item is returned for the appropriate index.
-     *     Both upper and lower bounds are checked to verify the
-     *     correct value is returned for an incorrect input.
+     * retrieved using get(). The result is verified to ensure the
+     * correct item is returned for the appropriate index. Both upper
+     * and lower bounds are checked to verify the correct value is
+     * returned for an incorrect input.
      */
     @Test
     public void testGet() {
@@ -164,9 +163,9 @@ public class InfoTest {
 
     /**
      * Items are inserted into an array, then the count is verified at
-     *     count = 0, count = 1, count = 2.  Next, the items are
-     *     removed, and the count is verified once more to ensure that
-     *     count is reset properly after the array has been emptied
+     * count = 0, count = 1, count = 2. Next, the items are removed,
+     * and the count is verified once more to ensure that count is
+     * reset properly after the array has been emptied
      */
     @Test
     public void testCount() {
@@ -196,10 +195,10 @@ public class InfoTest {
 
     /**
      * Insert items into array, then the functionality of copy() is
-     *     verified by copying various subsets of the array and
-     *     testing the values with-in those arrays.  Finally three out
-     *     of bounds conditions are tested, in such a way that all
-     *     possible out of bounds conditions are tested.
+     * verified by copying various subsets of the array and testing
+     * the values with-in those arrays. Finally three out of bounds
+     * conditions are tested, in such a way that all possible out of
+     * bounds conditions are tested.
      */
     @Test
     public void testCopy() {
@@ -265,12 +264,12 @@ public class InfoTest {
 
     /**
      * Two Info objects are created and filled with values in such a
-     *     way that one array in larger than the other.  Next, two
-     *     more values are added to each array so that the
-     *     intersection of the two arrays is not empty.  Finally,
-     *     merge() is called and the returned array is checked to
-     *     verify all items from the original two arrays (except
-     *     duplicates) are present and in ascending order
+     * way that one array in larger than the other. Next, two more
+     * values are added to each array so that the intersection of the
+     * two arrays is not empty. Finally, merge() is called and the
+     * returned array is checked to verify all items from the original
+     * two arrays (except duplicates) are present and in ascending
+     * order
      */
     @Test
     public void testMerge() {
@@ -298,10 +297,9 @@ public class InfoTest {
 
     /**
      * An Info object is created and filled, then indexOf() is called
-     *     to retrieve specific values.  The results are tested to
-     *     verify that the correct item is returned.  Finally,
-     *     indexOf() is called with incorrect values to verify the
-     *     correct value is returned.
+     * to retrieve specific values. The results are tested to verify
+     * that the correct item is returned. Finally, indexOf() is called
+     * with incorrect values to verify the correct value is returned.
      */
     @Test
     public void testIndexOf() {
@@ -334,8 +332,8 @@ public class InfoTest {
        
     /**
      * Create two Info objects, fill them and test the functionality
-     *     of deleteInfoList. Every occurrence of an Item object from
-     *     list 2 that common to list 1 should be removed from list 1.
+     * of deleteInfoList. Every occurrence of an Item object from list
+     * 2 that common to list 1 should be removed from list 1.
      */
     @Test
     public void testDeleteInfoList() {

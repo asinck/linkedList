@@ -1,5 +1,3 @@
-package info;
-
 /**
  * @author John Gardiner and Adam Sinck
  * 
@@ -9,6 +7,9 @@ package info;
  * singly-linked list, using Nodes. The Node class has an Item (an
  * external class), and the next Node.
  */
+
+package info;
+
 public class Info {
     
     /* Inner Class */
@@ -48,7 +49,7 @@ public class Info {
     /**
      * This inserts an Item into the list.
      *
-     * @param itemToInsert the Item to be inserted
+     * @param itemToInsert, the Item to be inserted
      */
     public void insert (Item itemToInsert) {
         //make a list of one item
@@ -68,7 +69,7 @@ public class Info {
     /**
      * This deletes the given Item from the list.
      *
-     * @param itemToDelete Item to be removed from this Info object
+     * @param itemToDelete, Item to be removed from this Info object
      */
     public void delete (Item itemToDelete) {
         Info deleteList = new Info();
@@ -78,12 +79,12 @@ public class Info {
     }
     
     /**
-     * Remove a list of items from this info list.  The result is that
-     *     items common to this Info object and the input Info object
-     *     are removed from this Info object.
+     * Remove a list of items from this info list. The result is that
+     * items common to this Info object and the input Info object are
+     * removed from this Info object.
      *
-     * @param itemsToDelete Info object to containing items to remove
-     *        from this Info object
+     * @param itemsToDelete, an Info object to containing items to
+     *        remove from this Info object
      */
     public void delete (Info itemsToDelete) {
         Node currentNode = list;
@@ -120,6 +121,8 @@ public class Info {
 
     /**
      * This returns the Item associated with the given key.
+     *
+     * @param targetIndex, the index of the item
      * 
      * @return the Item associated with the given key, or null if
      *         not found.
@@ -152,15 +155,15 @@ public class Info {
 
     /**
      * Return an Info object that is a copy of the contents from the
-     *     first parameter position to the last parameter position.
-     *     If the bounds given are out of bounds, return null.
+     * first parameter position to the last parameter position. If the
+     * bounds given are out of bounds, return null.
      *
      * @param targetStart first position to copy
      * @param targetEnd last position to copy
      *
      * @return new Info object
      */
-    Info copy (int targetStart, int targetEnd) {
+    public Info copy (int targetStart, int targetEnd) {
         Node currentNode = null;
         int index = 0;
         Info listCopy = new Info();
@@ -200,14 +203,14 @@ public class Info {
         
     /**
      * Merge the current Info object with the parameter Info object.
-     *     The results should be a new Info object in ascending order
-     *     with no duplicates.
+     * The results should be a new Info object in ascending order with
+     * no duplicates.
      *
      * @param inputList Info object to merge with the current Info object
      *
      * @return new Info object with merged values
      */
-    Info merge (Info inputList) {
+    public Info merge (Info inputList) {
         Info mergedList = new Info();
         
         Node thisCurrentNode = list;
@@ -256,6 +259,8 @@ public class Info {
     /**
      * This returns the index of the given Item.
      *
+     * @param targetItem, the item to look for
+     * 
      * @return index, the index of the given item.
      */
     public int indexOf (Item targetItem) {

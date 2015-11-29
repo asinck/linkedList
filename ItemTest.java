@@ -2,9 +2,9 @@
  * @author John Gardiner and Adam Sinck
  *
  * The ItemTest class contains a series of JUnit test methods that
- *     operate on methods of the Item class.  Output for both correct
- *     and incorrect inputs are tested, in addition to other aspects
- *     of the specifications.
+ * operate on methods of the Item class. Output for both correct and
+ * incorrect inputs are tested, in addition to other aspects of the
+ * specifications.
  */
 
 package info;
@@ -15,8 +15,8 @@ import org.junit.Test;
 
 public class ItemTest {
     /**
-     * Class constructor should initialize object with the two
-     *     values passed to the constructor.
+     * Class constructor should initialize object with the two values
+     * passed to the constructor.
      */
     @Test
     public void testItem() {        
@@ -27,8 +27,8 @@ public class ItemTest {
     }
         
     /**
-     * Class constructor should initialize object using values
-     *     from another Item object.
+     * Class constructor should initialize object using values from
+     * another Item object.
      */
     @Test
     public void testItemCopy() {    
@@ -41,7 +41,7 @@ public class ItemTest {
         
     /**
      * compareTo should compare two Item objects, then return 0 if
-     *     this = other, -1 if this < other, 1 if this > other.
+     * this = other, -1 if this < other, 1 if this > other.
      */
     @Test
     public void testCompareTo() {   

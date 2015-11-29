@@ -1,12 +1,11 @@
-package info;
-
 /**
  * @author John Gardiner and Adam Sinck
  * 
  * This program will implement one class (the item class), which will
  * be used by the Info class. It implements the Comparable interface.
- *
  */
+
+package info;
 
 public class Item implements Comparable<Item> {
     public final static String DELIMITER = " ";
@@ -15,6 +14,9 @@ public class Item implements Comparable<Item> {
 
     /**
      * This is the constructor for the class.
+     * 
+     * @param myString, the value for str
+     * @param myValue, the value for val
      */
     public Item (String myString, int myValue) {
         str = myString;
@@ -23,6 +25,8 @@ public class Item implements Comparable<Item> {
     
     /**
      * This is the copy constructor for the class.
+     * 
+     * @param newItem, the item to be made
      */
     public Item (Item newItem) {
         str = newItem.str;
@@ -31,6 +35,10 @@ public class Item implements Comparable<Item> {
 
     /**
      * This compares the values of the two strings.
+     *
+     * @param inputItem, the item to compare to
+     * 
+     * @return the result of the comparison
      */
     @Override public int compareTo(Item inputItem) {
         Item otherItem = (Item) inputItem;
