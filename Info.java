@@ -296,9 +296,9 @@ public class Info {
         while (currentNode != null) {
             output.append(currentNode.data.toString());
 
-	    if(currentNode.next != null) {
-		 output.append(" ");
-	    }
+            if(currentNode.next != null) {
+                output.append(" ");
+            }
              
             currentNode = currentNode.next;
 

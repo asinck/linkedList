@@ -143,22 +143,22 @@ public class InfoTest {
         
         //Get first item in array
         assertEquals("failed to get first item from array", "A" +
-            Item.DELIMITER + "1", info.get(0).toString());
+                     Item.DELIMITER + "1", info.get(0).toString());
         
         //Get middle item in array
         assertEquals("failed to get middle item from array", "C" +
-            Item.DELIMITER + "3", info.get(2).toString());
+                     Item.DELIMITER + "3", info.get(2).toString());
         
         //Get last item in array
         assertEquals("failed to get last item from array", "D" +
-            Item.DELIMITER + "4", info.get(3).toString());
+                     Item.DELIMITER + "4", info.get(3).toString());
         
         //Get items out bounds (should return null)
         assertNull("incorrect value returned for index < 0", info.get(-1));
         
         //Get items out bounds (should return null)
         assertNull("incorrect value returned for index >= than array size",
-            info.get(4));
+                   info.get(4));
     }
 
     /**
@@ -220,33 +220,33 @@ public class InfoTest {
         assertNotNull("failed to initialize new array", i);
         assertEquals("failed to copy first item", 1, i.count());
         assertEquals("failed to copy first item", "B" + Item.DELIMITER + 2,
-            i.get(0).toString());
+                     i.get(0).toString());
         
         //Copy middle two items
         i = info.copy(1, 2);
         assertEquals("failed to copy middle items", 2, i.count());
         assertEquals("failed to copy middle items", "B" + Item.DELIMITER + "2",
-            i.get(0).toString());
+                     i.get(0).toString());
         assertEquals("failed to copy middle items", "C" + Item.DELIMITER + "3",
-            i.get(1).toString());
+                     i.get(1).toString());
         
         //Copy last item
         i = info.copy(3, 3);
         assertEquals("failed to copy last item", 1, i.count());
         assertEquals("failed to copy last item", "D" + Item.DELIMITER + "4",
-            i.get(0).toString());
+                     i.get(0).toString());
         
         //Copy entire array
         i = info.copy(0, 3);
         assertEquals("failed to copy entire array", 4, i.count());
         assertEquals("failed to copy entire array", "A" + Item.DELIMITER + "1",
-            i.get(0).toString());
+                     i.get(0).toString());
         assertEquals("failed to copy entire array", "B" + Item.DELIMITER + "2",
-            i.get(1).toString());
+                     i.get(1).toString());
         assertEquals("failed to copy entire array", "C" + Item.DELIMITER + "3",
-            i.get(2).toString());
+                     i.get(2).toString());
         assertEquals("failed to copy entire array", "D" + Item.DELIMITER + "4",
-            i.get(3).toString());
+                     i.get(3).toString());
         
         //Test out of bounds
         //x < 0
@@ -255,13 +255,13 @@ public class InfoTest {
         
         //y >= size
         assertEquals("wrong value returned for index >= array size", 0, 
-        	i.count());
+                     i.count());
         i = info.copy(0, 4);
         
         //x > y
         i = info.copy(3, 2);
         assertEquals("wrong value returned when bounds are switched", 0, 
-        	i.count());
+                     i.count());
     }
 
     /**
@@ -290,11 +290,11 @@ public class InfoTest {
 
         Info mergedList = listA.merge(listB);
         assertEquals("failed to correctly sort merged list", "A" + 
-        	Item.DELIMITER + "1", mergedList.get(0).toString());
+                     Item.DELIMITER + "1", mergedList.get(0).toString());
         assertEquals("failed to correctly sort merged list", "B" + 
-            Item.DELIMITER + "2", mergedList.get(1).toString());
+                     Item.DELIMITER + "2", mergedList.get(1).toString());
         assertEquals("failed to correctly sort merged list", "C" + 
-            Item.DELIMITER + "3", mergedList.get(2).toString());
+                     Item.DELIMITER + "3", mergedList.get(2).toString());
     }
 
     /**
@@ -327,9 +327,9 @@ public class InfoTest {
         
         //Verify correct value (-1) for invalid input
         assertEquals("incorrect value returned for invalid input", -1,
-            info.indexOf(i0));
+                     info.indexOf(i0));
         assertEquals("incorrect value returned for invalid input", -1,
-            info.indexOf(i5));
+                     info.indexOf(i5));
     }
        
     /**
@@ -366,13 +366,13 @@ public class InfoTest {
         //Verify delete functionality
         assertEquals("failed to correctly delete info list", 3, info.count());
         assertNotEquals("failed to correctly delete info list", "A" +
-           Item.DELIMITER + "0", info.get(0).toString());
+                        Item.DELIMITER + "0", info.get(0).toString());
         assertEquals("failed to correctly delete info list", "B" +
-           Item.DELIMITER + "1", info.get(0).toString());
+                     Item.DELIMITER + "1", info.get(0).toString());
         assertEquals("failed to correctly delete info list", "C" +
-           Item.DELIMITER + "2", info.get(1).toString());
+                     Item.DELIMITER + "2", info.get(1).toString());
         assertEquals("failed to correctly delete info list", "E" +
-           Item.DELIMITER + "4", info.get(2).toString());
+                     Item.DELIMITER + "4", info.get(2).toString());
                 
         //Refill values into each list so they are the same
         info.insert(i0);
